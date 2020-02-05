@@ -2,14 +2,18 @@
 
 **Unofficial** reproduction of the paper [What's Hidden in a Randomly Weighted Neural Network?](https://arxiv.org/abs/1911.13299).
 
+![A Subnetwork](./img/subnetwork.png)
+
 Status: in development.
 
 ## Results
 
-| Size (px) | Arch | Epochs | Commit | Accuracy | # Runs | edge-popup |
-|--|--|--|--|--|--|
-|128|`xresnet50`|20|[xxx](xxx)|86.44%|5, mean|yes|
-|128|`xresnet50`|20|[xxx](xxx)|**89.53%**|5, mean|no|
+| Dataset | Arch | Epochs | edge-popup | Commit | Accuracy | # Runs |
+|--|--|--|--|--|--|--|
+|[Imagenette](https://github.com/fastai/imagenette)|`xresnet50`|5|yes|[55e34a6b](https://github.com/iceychris/edge-popup/tree/55e34a6bbabb5d536d3c8ee7e52b034df3f88e37)|76.18%|5, mean|
+|[Imagenette](https://github.com/fastai/imagenette)|`xresnet50`|5|no|[55e34a6b](https://github.com/iceychris/edge-popup/tree/55e34a6bbabb5d536d3c8ee7e52b034df3f88e37)|80.94%|5, mean|
+|[Imagenette](https://github.com/fastai/imagenette)|`xresnet50`|20|yes|[55e34a6b](https://github.com/iceychris/edge-popup/tree/55e34a6bbabb5d536d3c8ee7e52b034df3f88e37)|86.44%|5, mean|
+|[Imagenette](https://github.com/fastai/imagenette)|`xresnet50`|20|no|[55e34a6b](https://github.com/iceychris/edge-popup/tree/55e34a6bbabb5d536d3c8ee7e52b034df3f88e37)|89.53%|5, mean|
 
 ## ToDo
 
@@ -22,6 +26,10 @@ Status: in development.
     - [ ] `LSTM`
 - [ ] tests
     - [ ] initializations / variance
+    
+## Resources
+
+- [[Video] Henry AI Labs - What's Hidden in a Randomly Weighted Neural Network?](https://youtu.be/C6Tj8anJO-Q)
 
 ## Contributing
 
