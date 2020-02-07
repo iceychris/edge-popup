@@ -7,6 +7,8 @@ import torch.autograd as autograd
 
 from IPython.core.debugger import set_trace
 
+K = 0.3
+
 
 def signed_kaiming_constant_(tensor, a=0, mode='fan_in', nonlinearity='relu', k=1.):
     fan = nn.init._calculate_correct_fan(tensor, mode)
@@ -44,8 +46,8 @@ class GetSubnet(autograd.Function):
 
 class LinearSubnet(nn.Linear):
 
-    def __init__(self, *args, k=0.3, init=signed_kaiming_constant_, **kwargs):
-        super(LinearSubnet, self).__init__(*args, **kwargs)
+    def __init__(self, in_features, out_features, bias=True, k=K, init=signed_kaiming_constant_, **kwargs):
+        super(LinearSubnet, self).__init__(in_features, out_features, bias if isinstance(bias, bool) else True, **kwargs)
         self.k = k
         self.popup_scores = nn.Parameter(torch.randn(*self.weight.shape))
 
@@ -54,7 +56,7 @@ class LinearSubnet(nn.Linear):
 
         # disable grad for the original parameters
         self.weight.requires_grad_(False)
-        if self.bias:
+        if self.bias is not None:
             self.bias.requires_grad_(False)
 
     # self.k is the % of weights remaining, a real number in [0,1]
@@ -62,7 +64,7 @@ class LinearSubnet(nn.Linear):
     # Gradients to self.weight, self.bias have been turned off.
     def forward(self, x):
         # Get the subnetwork by sorting the scores.
-        adj = GetSubnet.apply(self.popup_scores.abs(), self.weight, x, self.k)
+        adj = GetSubnet.apply(self.popup_scores.abs(), self.k)
 
         # Use only the subnetwork in the forward pass.
         w = self.weight * adj
@@ -72,7 +74,7 @@ class LinearSubnet(nn.Linear):
 
 class Conv2dSubnet(nn.Conv2d):
     
-    def __init__(self, *args, k=0.3, init=signed_kaiming_constant_, **kwargs):
+    def __init__(self, *args, k=K, init=signed_kaiming_constant_, **kwargs):
         super(Conv2dSubnet, self).__init__(*args, **kwargs)
         self.k = k
         self.popup_scores = nn.Parameter(torch.randn(*self.weight.shape))

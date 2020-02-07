@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 import inspect
 
-def adapt_model(parent, orig, new, attrs=None):
+def adapt_model(parent, orig, new, attrs=None, extra_args={}):
     
     # grab necessary arguments
     if not attrs:
@@ -17,8 +17,10 @@ def adapt_model(parent, orig, new, attrs=None):
         target_attr = m 
         if type(target_attr) == orig:
             # print('replacing:', n, attr_str)
-            setattr(parent, attr_str, new(*[getattr(target_attr, attr) for attr in attrs]))
+            args = {attr: getattr(target_attr, attr) for attr in attrs}
+            args.update(extra_args)
+            setattr(parent, attr_str, new(**args))
             continue
             
         # recurse
-        adapt_model(m, orig=orig, new=new, attrs=attrs)
+        adapt_model(m, orig=orig, new=new, attrs=attrs, extra_args=extra_args)

@@ -15,6 +15,10 @@ Status: in development.
 |[Imagenette](https://github.com/fastai/imagenette)|`xresnet50`|20|yes|[55e34a6b](https://github.com/iceychris/edge-popup/tree/55e34a6bbabb5d536d3c8ee7e52b034df3f88e37)|86.44%|5, mean|
 |[Imagenette](https://github.com/fastai/imagenette)|`xresnet50`|20|no|[55e34a6b](https://github.com/iceychris/edge-popup/tree/55e34a6bbabb5d536d3c8ee7e52b034df3f88e37)|89.53%|5, mean|
 
+Paper (`CIFAR-10`, `Conv 8`)            |  Reproduction (`Imagewoof`, `xresnet50`)
+:-------------------------:|:-------------------------:
+![paper](./img/paper/conv8_ks.png)  |  ![repro](./img/experiments/imagewoof_xresnet50_ks_10ep_5r.png)
+
 ## ToDo
 
 - [ ] init
@@ -23,6 +27,7 @@ Status: in development.
 - [ ] layers
     - [x] `Linear`
     - [x] `Conv2d`
+    - [ ] `BatchNorm2d`
     - [ ] `LSTM`
 - [ ] tests
     - [ ] initializations / variance
