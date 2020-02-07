@@ -1,3 +1,4 @@
+matplotlib==3.1.2
 torch==1.3.0
 torchvision=0.4.2
 -e git+https://github.com/fastai/fastai2@c0bca39cce3c30114d02cfb51860446aa395895b#egg=fastai2
