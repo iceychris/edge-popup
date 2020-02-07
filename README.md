@@ -2,7 +2,7 @@
 
 **Unofficial** reproduction of the paper [What's Hidden in a Randomly Weighted Neural Network?](https://arxiv.org/abs/1911.13299).
 
-![A Subnetwork](./img/subnetwork.png)
+![A Subnetwork](./img/paper/subnetwork.png)
 
 Status: in development.
 
